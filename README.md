@@ -22,3 +22,5 @@ yarn lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+在Xmind软件中绘制了该项目的思维导图，便于梳理。
