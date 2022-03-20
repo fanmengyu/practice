@@ -16,10 +16,12 @@
       :index="item.path"
       :key="item.path"
     >
+    <!-- 无子菜单部分 -->
       <i :class="'el-icon-' + item.icon"></i>
       <span slot="title">{{ item.label }}</span>
     </el-menu-item>
-    <el-submenu v-for="item in hasChildren" :index="item.path + ''" :key="item.path">
+    <el-submenu v-for="item in hasChildren" :index="item.label" :key="item.label">
+     <!-- 有子菜单部分 -->
       <template slot="title">
         <i :class="'el-icon-' + item.icon"></i>
         <span slot="title">{{ item.label }}</span>
@@ -29,7 +31,7 @@
         :index="subIndex + ''"
         :key="subItem.path"  
       >
-        <el-menu-item  @click="clickMenu(subItem)" index="subIndex">{{ subItem.label }}</el-menu-item>
+        <el-menu-item  @click="clickMenu(subItem)" index="subIndex.toString()">{{ subItem.label }}</el-menu-item>
       </el-menu-item-group>
     </el-submenu>
   </el-menu>
@@ -39,7 +41,7 @@
 export default {
   data() {
     return {
-      // isCollapse: true, //控制菜单是否展开
+
       // menu: [
       //   {
       //     path: "/",
@@ -95,17 +97,21 @@ export default {
       console.log(key, keyPath);
     },
     clickMenu(item){
+      //编程式路由导航
         this.$router.push({
           name:item.name,
         })
+        //面包屑功能
         this.$store.commit('selectMenu', item)
     }
   },
   computed: {
     noChildren() {
+      // 无子菜单
       return this.asyncMenu.filter((item) => !item.children);
     },
     hasChildren() {
+      //有子菜单
       return this.asyncMenu.filter((item) => item.children);
     },
     isCollapse(){

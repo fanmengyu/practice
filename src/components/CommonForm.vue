@@ -21,6 +21,7 @@
         placeholder="选择日期"
         v-model="form[item.model]"
       >
+      <!-- value-format定义日期格式 -->
       </el-date-picker>
       <el-select
       v-if="item.type === 'select'"
@@ -44,8 +45,8 @@ export default {
   name: "CommonForm",
   props: {
     formLabel: Array,
-    form: Object,
-    inline: Boolean,
+    form: Object,//表单数据
+    inline: Boolean,//表单布局
   },
   data() {
     return {};

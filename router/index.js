@@ -8,9 +8,11 @@ const routes=[
     {
     path:'/',
     name:'Main',
+    //按需引入
     component:()=>import('../views/Main.vue'),
     children:[]
 },
+//登陆页面
 {
     path:'/login',
     name:'login',

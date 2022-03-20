@@ -4,6 +4,7 @@ import userApi from './mockServeData/user'
 import permissionApi from './mockServeData/permission'
 
 Mock.mock(' /api/home/getData ',homeApi.getStatisticalData)
+
 Mock.mock(/user\/add/,'post',userApi.createUser)
 Mock.mock(/user\/edit/,'post',userApi.updateUser)
 

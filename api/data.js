@@ -10,6 +10,7 @@ export const getMenu = (param)=>{
 } 
 export const getData=()=>{
     return axios.request({
+        //Mock中拦截器
         url:' /api/home/getData ',
         method:'get'
 
@@ -22,4 +23,5 @@ export const getUser=(params)=>{
         params
     })
 }
+
 

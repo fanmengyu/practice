@@ -19,7 +19,9 @@
         v-model="form.username"
         autocomplete="off"
         placeholder="请输入账号"
-      ></el-input>
+      >
+      <!-- autocomplete 自动补全 -->
+      </el-input>
     </el-form-item>
 
     <el-form-item label="密码" label-width="80px" prop="password">
@@ -48,6 +50,7 @@ export default {
         return {
             form:{},
             rules:{
+              //表单校验
                 username:[
                     {required:true,message:"请输入用户名",trigger:"blur"},
                     {
@@ -67,7 +70,7 @@ export default {
     },
     methods:{
         login(){
-            
+            //菜单权限设定
             getMenu(this.form).then(({data:res})=>{
                 console.log(res,'res')
                 if(res.code===20000){

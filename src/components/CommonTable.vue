@@ -15,12 +15,12 @@
       <el-table-column label="操作" min-width="180">
         <template slot-scope="scope">
           <el-button size="mini" @click="handleEdit(scope.row)">编辑</el-button>
-          <el-button size="mini" type="danger" @click="handleDelete(scope.row)"
-            >删除</el-button>
+          <el-button size="mini" type="danger" @click="handleDelete(scope.row)">删除</el-button>
         </template>
     
       </el-table-column>
     </el-table>
+    <!-- 分页组件 -->
     <el-pagination
       class="pager"
       layout="prev, pager, next"
@@ -45,6 +45,7 @@ export default {
   },
   methods: {
     handleEdit(row) {
+      //子组件==》父组件
       this.$emit("edit", row);
     },
     handleDelete(row) {

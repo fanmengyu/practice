@@ -11,6 +11,7 @@ import './assets/less/index.less'
 import router from '../router'
 import store from './store'
 import http from 'axios'
+//mock的引入
 import '../api/mock.js'
 
 Vue.config.silent = true
@@ -45,12 +46,16 @@ Vue.use(Switch)
 Vue.use(DatePicker)
 Vue.use(Dialog)
 Vue.use(Pagination)
-Vue.use(Message)
-Vue.use(MessageBox)
 
+Vue.component(Message.name, Message);
+Vue.component(MessageBox.name, MessageBox);
+
+
+//由于axios不是插件，所以需要绑定在vue的prototype属性上
 Vue.prototype.$http = http
 Vue.prototype.$confirm = MessageBox.confirm
 Vue.prototype.$message = Message
+
 
 // 导航守卫逻辑
 router.beforeEach((to,from,next)=>{

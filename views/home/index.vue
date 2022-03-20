@@ -1,6 +1,6 @@
 <template>
   <el-row class="home" :gutter="20">
-    <el-col :span="8" style="margin-top=5px">
+    <el-col :span="8" style="margin-top:5px">
       <el-card shadow="hover">
         <div class="user">
           <img :src="userImg" />
@@ -14,7 +14,7 @@
           <p>上次登录地点：<span>西安</span></p>
         </div>
       </el-card>
-      <el-card style="margin-top: 20px; height: 400px">
+      <el-card style="margin-top: 20px; height: 455px">
         <el-table :data="tableData">
           <el-table-column
             v-for="(val, key) in tableLabel"
@@ -26,7 +26,7 @@
         </el-table>
       </el-card>
     </el-col>
-    <el-col style="margin-top: 20px" :span="16">
+    <el-col style="margin-top: 5px" :span="16">
       <div class="num">
         <el-card
           v-for="item in countData"
@@ -58,6 +58,7 @@
         <el-card style="height: 260px">
           <!-- 饼图 -->
           <!-- <div style="height: 240px" ref="videoEcharts"></div> -->
+          <!-- 额外传入一个isAxisChart表明不是柱状图和折线图，不需要x轴 -->
           <echart :chartData="echartData.video" :isAxisChart="false" style="height: 240px"/>
         </el-card>
       </div>
@@ -66,6 +67,7 @@
 </template>
 
 <script>
+
 import { getData } from "../../api/data.js";
 // import * as echarts from 'echarts'
 import Echart from '../../src/components/ECharts';
@@ -76,44 +78,8 @@ export default {
   data() {
     return {
       userImg: require("../../src/assets/images/user.png"),
-      tableData: [
-        {
-          name: "oppo",
-          todayBuy: 100,
-          monthBuy: 300,
-          totalBuy: 800,
-        },
-        {
-          name: "vivo",
-          todayBuy: 100,
-          monthBuy: 300,
-          totalBuy: 800,
-        },
-        {
-          name: "苹果",
-          todayBuy: 100,
-          monthBuy: 300,
-          totalBuy: 800,
-        },
-        {
-          name: "小米",
-          todayBuy: 100,
-          monthBuy: 300,
-          totalBuy: 800,
-        },
-        {
-          name: "三星",
-          todayBuy: 100,
-          monthBuy: 300,
-          totalBuy: 800,
-        },
-        {
-          name: "魅族",
-          todayBuy: 100,
-          monthBuy: 300,
-          totalBuy: 800,
-        },
-      ],
+      //数据通过Mock模拟后台数据接口获取
+      tableData: [],
       tableLabel: {
         name: "品牌",
         todayBuy: "今日购买",
@@ -159,14 +125,17 @@ export default {
         },
       ],
       echartData:{
+        //折线图
         order:{
           xData:[],
           series:[]
         },
+        //柱状图
         user:{
            xData:[],
           series:[]
         },
+        //饼图 
         video:{
           series:[]
         }
@@ -175,18 +144,20 @@ export default {
   },
   mounted() {
     getData().then(res => {
+      //解构赋值
       const {code, data} = res.data
       if (code === 20000) {
         this.tableData = data.tableData
         const order = data.orderData
         const xData = order.date
+        //对象方法扩展Object.keys获取对象所有的键
         const keyArray = Object.keys(order.data[0])
         const series=[]
         keyArray.forEach(key => {
           series.push({
             name:key,
             data:order.data.map(item=> item[key]),
-            type:'line'
+            type:'line'//折线图
           })
         });
         // const option={

@@ -1,6 +1,7 @@
 <template>
   <header>
     <div class="l-content">
+      <!-- plain是朴素按钮 -->
       <el-button
         @click="handleMenu"
         plain
@@ -14,8 +15,8 @@
           v-for="item in tags"
           :key="item.path"
           :to="{ path: item.path }"
-          >{{ item.label }}</el-breadcrumb-item
-        >
+          >{{ item.label }}
+          </el-breadcrumb-item>
       </el-breadcrumb>
     </div>
     <div class="r-content">
@@ -50,8 +51,9 @@ export default {
     },
   },
   computed: {
+    //mapState方法：用于帮助我们映射state中的数据为计算属性
     ...mapState({
-      tags: state => state.tab.tabsList,
+      tags: state => state.tab.tabsList
     }),
   },
 };
@@ -61,6 +63,7 @@ export default {
 header {
   display: flex;
   height: 100%;
+  // 两端对齐，项目之间的间隔都相等
   justify-content: space-between;
   align-items: center;
 }
